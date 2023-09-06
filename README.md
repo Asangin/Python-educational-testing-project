@@ -11,11 +11,11 @@ python app.py
 - login
 
 ```bash
-curl --location --request POST 'http://127.0.0.1:5000/login' \
+curl --location --request POST 'http://127.0.0.1:5000/api/v1/login' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "username": "test",
-    "password": "test"
+    "username": "batman",
+    "password": "password"
 }'
 ```
 

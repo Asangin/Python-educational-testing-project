@@ -21,6 +21,7 @@ jwt = JWTManager(app)
 db = SQLAlchemy(app)
 ma = Marshmallow()
 ma.init_app(db)
+app.app_context().push()
 
 
 class User(db.Model):
@@ -39,14 +40,17 @@ class UserSchema(ma.Schema):
         # Fields to expose
         fields = ("id", "username", "full_name")
 
+
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
+
 
 # Register a callback function that takes whatever object is passed in as the
 # identity when creating JWTs and converts it to a JSON serializable format.
 @jwt.user_identity_loader
 def user_identity_lookup(user):
     return user.id
+
 
 # Register a callback that loads a user from your database whenever
 # a protected route is accessed. This should return any python object on a
@@ -62,6 +66,7 @@ def user_lookup_callback(_jwt_header, jwt_data):
 #     name = request.json["name"]
 #     email = request.json["email"]
 #     password = request.json["password"]
+
 
 # Create a route to authenticate your users and return JWTs. The
 # create_access_token() function is used to actually generate the JWT.
@@ -80,7 +85,7 @@ def login():
 
 
 @app.route("/api/v2/login", methods=["POST"])
-def loginV2():
+def login_v2():
     username = request.form['username']
     password = request.form['password']
 

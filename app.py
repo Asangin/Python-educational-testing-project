@@ -22,6 +22,7 @@ db = SQLAlchemy(app)
 ma = Marshmallow()
 ma.init_app(db)
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.Text, nullable=False, unique=True)
@@ -111,7 +112,6 @@ def user_list():
     users = User.query.all()
     all_users = users_schema.dump(users) 
     return jsonify(all_users)
-
 
 
 if __name__ == "__main__":

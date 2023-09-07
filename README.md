@@ -5,8 +5,25 @@
 [Locust documentation](https://docs.locust.io/en/stable/index.html)
 
 ### Structure
-[locust-scripts](locust-scripts) contains all the scenarios to do performance testing written on Python using Locust library
-[locust-load-shapes](locust-load-shapes) contains different custom load shapes for performance scenarios 
+
+[locust-scripts](locust-scripts) contains all the scenarios to do performance testing written on Python using Locust
+library
+[locust-load-shapes](locust-load-shapes) contains different custom load shapes for performance scenarios
+
+### Basic scenario
+
+Run basic scenario with GUI just typing `locust` which will pick [locustfile.py](locustfile.py) or by custom specifying
+locust scenario:
+
+```bash
+locust -f locust-scripts/basic_user_scenario.py
+```
+
+Run basic scenario with custom load shape:
+
+```bash
+locust -f locust-scripts/basic_user_scenario.py,locust-load-shapes/basic_load_shape.py
+```
 
 ## Flask test
 
@@ -33,7 +50,7 @@ Response example:
 
 ```json
 {
-     "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2MzIyNzcyNywianRpIjoiNDNiM2EzYjAtNzFiNS00NjFlLTk5YWYtNzljYzQyOTI5MGZkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InRlc3QiLCJuYmYiOjE2NjMyMjc3MjcsImV4cCI6MTY2MzIyODYyN30.A0OHY0qK5Tc8BDMSC5kLYhA69zme0pn08kHcoW5rmUE"
+  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2MzIyNzcyNywianRpIjoiNDNiM2EzYjAtNzFiNS00NjFlLTk5YWYtNzljYzQyOTI5MGZkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InRlc3QiLCJuYmYiOjE2NjMyMjc3MjcsImV4cCI6MTY2MzIyODYyN30.A0OHY0qK5Tc8BDMSC5kLYhA69zme0pn08kHcoW5rmUE"
 }
 ```
 
@@ -48,7 +65,7 @@ Response example
 
 ```json
 {
-    "logged_in_as": "1"
+  "logged_in_as": "1"
 }
 ```
 
@@ -62,20 +79,20 @@ Response example:
 
 ```json
 [
-    {
-        "full_name": "Bruce Wayne",
-        "id": 1,
-        "username": "batman"
-    },
-    {
-        "full_name": "Ann Takamaki",
-        "id": 2,
-        "username": "panther"
-    },
-    {
-        "full_name": "Jester Lavore",
-        "id": 3,
-        "username": "little_sapphire"
-    }
+  {
+    "full_name": "Bruce Wayne",
+    "id": 1,
+    "username": "batman"
+  },
+  {
+    "full_name": "Ann Takamaki",
+    "id": 2,
+    "username": "panther"
+  },
+  {
+    "full_name": "Jester Lavore",
+    "id": 3,
+    "username": "little_sapphire"
+  }
 ]
 ```

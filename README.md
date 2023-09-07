@@ -1,14 +1,24 @@
-# Flask test
+# Service under Performance test
 
-## Run server
+## Locust
+
+[Locust documentation](https://docs.locust.io/en/stable/index.html)
+
+### Structure
+[locust-scripts](locust-scripts) contains all the scenarios to do performance testing written on Python using Locust library
+[locust-load-shapes](locust-load-shapes) contains different custom load shapes for performance scenarios 
+
+## Flask test
+
+### Run server
 
 ```bash
 python app.py
 ```
 
-## Request, response examples
+### Request, response examples
 
-- login
+User login
 
 ```bash
 curl --location --request POST 'http://127.0.0.1:5000/api/v1/login' \

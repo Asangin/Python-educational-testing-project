@@ -26,11 +26,17 @@ step load shape
 locust -f locust-scripts/basic_user_scenario.py,locust-load-shapes/step_load_shape.py
 ```
 
-stress load shape
+Stress load shape
 ```bash
 locust -f locust-scripts/basic_user_scenario.py,locust-load-shapes/stress_load_shape.py
 ```
 ![Stress test load shape](img/stress_test_user_load_shape.png)
+
+Spike load shape
+```bash
+locust -f locust-scripts/basic_user_scenario.py,locust-load-shapes/spike_load_shape.py
+```
+![Spike load shape](img/spike_load_shape.png)
 
 ## Flask test
 

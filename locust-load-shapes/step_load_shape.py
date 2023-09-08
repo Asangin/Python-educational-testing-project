@@ -4,8 +4,9 @@ from locust import LoadTestShape
 
 class StepLoadShape(LoadTestShape):
     """
-    A step load shape
+    Was taken from https://github.com/locustio/locust/blob/master/examples/custom_shape/step_load.py
 
+    A step load shape
 
     Keyword arguments:
 

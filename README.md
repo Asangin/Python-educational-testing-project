@@ -21,9 +21,16 @@ locust -f locust-scripts/basic_user_scenario.py
 
 Run basic scenario with custom load shape:
 
+step load shape
 ```bash
-locust -f locust-scripts/basic_user_scenario.py,locust-load-shapes/basic_load_shape.py
+locust -f locust-scripts/basic_user_scenario.py,locust-load-shapes/step_load_shape.py
 ```
+
+stress load shape
+```bash
+locust -f locust-scripts/basic_user_scenario.py,locust-load-shapes/stress_load_shape.py
+```
+![Stress test load shape](img/stress_test_user_load_shape.png)
 
 ## Flask test
 

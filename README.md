@@ -2,9 +2,11 @@
 
 ## Locust
 
-[Locust documentation](https://docs.locust.io/en/stable/index.html)
+>[Locust documentation](https://docs.locust.io/en/stable/index.html)
 
 ### Structure
+
+> [Load Shape Documantation](https://docs.locust.io/en/stable/custom-load-shape.html)
 
 [locust-scripts](locust-scripts) contains all the scenarios to do performance testing written on Python using Locust
 library
@@ -38,7 +40,13 @@ locust -f locust-scripts/basic_user_scenario.py,locust-load-shapes/spike_load_sh
 ```
 ![Spike load shape](img/spike_load_shape.png)
 
-## Flask test
+Load shape
+```bash
+locust -f locust-scripts/basic_user_scenario.py,locust-load-shapes/load_shape.py
+```
+![Load shape](img/load_shape.png)
+
+## Service under test written in Flask
 
 ### Run server
 

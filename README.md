@@ -46,6 +46,11 @@ locust -f locust-scripts/basic_user_scenario.py,locust-load-shapes/load_shape.py
 ```
 ![Load shape](img/load_shape.png)
 
+Soak shape
+```bash
+locust -f locust-scripts/basic_user_scenario.py,locust-load-shapes/soak_shape.py
+```
+
 ## Service under test written in Flask
 
 ### Run server

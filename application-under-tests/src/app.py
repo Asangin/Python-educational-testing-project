@@ -12,7 +12,7 @@ from flask_jwt_extended import JWTManager
 
 app = Flask(__name__)
 
-# Setup the Flask-JWT-Extended extension
+# Set up the Flask-JWT-Extended extension
 app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite://"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -44,6 +44,15 @@ class UserSchema(ma.Schema):
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 
+with app.app_context():
+    print("Set up database with initial values")
+    db.create_all()
+    db.session.add(User(full_name="Bruce Wayne", username="batman"))
+    db.session.add(User(full_name="Ann Takamaki", username="panther"))
+    db.session.add(User(full_name="Jester Lavore", username="little_sapphire"))
+    db.session.commit()
+    print("Create db")
+
 
 @jwt.user_identity_loader
 def user_identity_lookup(user):
@@ -66,11 +75,19 @@ def user_lookup_callback(_jwt_header, jwt_data):
     return User.query.filter_by(id=identity).one_or_none()
 
 
-# @app.post("api/v1/create")
-# def create():
-#     name = request.json["name"]
-#     email = request.json["email"]
-#     password = request.json["password"]
+@app.post("/api/v1/create")
+def create():
+    full_name = request.json["full_name"]
+    username = request.json["username"]
+    password = request.json["password"]
+    db.session.add(User(full_name=full_name, username=username, password=password))
+    db.session.commit()
+    return '', 201
+
+
+@app.route("/")
+def health_check():
+    return "ok", 200
 
 
 @app.route("/api/v1/login", methods=["POST"])
@@ -128,11 +145,4 @@ def user_list():
 
 
 if __name__ == "__main__":
-    db.create_all()
-    db.session.add(User(full_name="Bruce Wayne", username="batman"))
-    db.session.add(User(full_name="Ann Takamaki", username="panther"))
-    db.session.add(User(full_name="Jester Lavore", username="little_sapphire"))
-    db.session.commit()
-    print("Create db")
-
-    app.run()
+    app.run(host='0.0.0.0', port=5001)

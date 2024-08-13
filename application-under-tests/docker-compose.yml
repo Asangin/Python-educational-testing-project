@@ -1,8 +1,8 @@
 version: "3.8"
 services:
-  python:
-    container_name: python-sut
-    image: asangin/python-sut:1.0.0
+  app-development:
+    container_name: python-sut-dev
+    image: asangin/python-sut-dev:1.0.0
     build:
       context: .
       target: dev
@@ -14,3 +14,12 @@ services:
       - ./src:/work
     ports:
       - "5001:5000"
+
+  app-production:
+    container_name: python-sut
+    image: asangin/python-sut:1.0.0
+    build: .
+    volumes:
+      - ./src:/work
+    ports:
+      - "5002:5000"

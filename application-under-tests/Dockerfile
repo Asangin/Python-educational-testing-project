@@ -6,6 +6,8 @@ WORKDIR /work/
 COPY requirements.txt /work/requirements.txt
 RUN pip install -r requirements.txt
 
+COPY src/app.py /work/
+
 FROM python:3.12-alpine3.19 as prod
 
 RUN mkdir /app/

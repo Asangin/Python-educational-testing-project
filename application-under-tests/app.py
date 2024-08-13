@@ -45,21 +45,26 @@ user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 
 
-# Register a callback function that takes whatever object is passed in as the
-# identity when creating JWTs and converts it to a JSON serializable format.
 @jwt.user_identity_loader
 def user_identity_lookup(user):
+    """
+    Register a callback function that takes whatever object is passed in as the identity when creating JWTs and
+    converts it to a JSON serializable format.
+    """
     return user.id
 
 
-# Register a callback that loads a user from your database whenever
-# a protected route is accessed. This should return any python object on a
-# successful lookup, or None if the lookup failed for any reason (for example
-# if the user has been deleted from the database).
 @jwt.user_lookup_loader
 def user_lookup_callback(_jwt_header, jwt_data):
+    """
+    Register a callback that loads a user from your database whenever
+    a protected route is accessed. This should return any python object on a
+    successful lookup, or None if the lookup failed for any reason (for example
+    if the user has been deleted from the database).
+    """
     identity = jwt_data["sub"]
     return User.query.filter_by(id=identity).one_or_none()
+
 
 # @app.post("api/v1/create")
 # def create():
@@ -68,10 +73,12 @@ def user_lookup_callback(_jwt_header, jwt_data):
 #     password = request.json["password"]
 
 
-# Create a route to authenticate your users and return JWTs. The
-# create_access_token() function is used to actually generate the JWT.
 @app.route("/api/v1/login", methods=["POST"])
 def login():
+    """
+    Create a route to authenticate your users and return JWTs.
+    The create_access_token() function is used to actually generate the JWT.
+    """
     username = request.json.get("username", None)
     password = request.json.get("password", None)
 
@@ -98,11 +105,12 @@ def login_v2():
     return jsonify(access_token=access_token)
 
 
-# Protect a route with jwt_required, which will kick out requests
-# without a valid JWT present.
 @app.route("/api/v1/who_am_i", methods=["GET"])
 @jwt_required()
 def who_am_i():
+    """
+    Protect a route with jwt_required, which will kick out requests without a valid JWT present.
+    """
     # Access the identity of the current user with get_jwt_identity
     current_user = User.query.get(get_jwt_identity())
     return jsonify(
@@ -115,7 +123,7 @@ def who_am_i():
 @app.route("/public/api/v1/users", methods=["GET"])
 def user_list():
     users = User.query.all()
-    all_users = users_schema.dump(users) 
+    all_users = users_schema.dump(users)
     return jsonify(all_users)
 
 
